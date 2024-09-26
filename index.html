@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Language Learning Quiz</title>
+        <title>Language Quiz</title>
         <link rel="stylesheet" href="style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <div class="toggle-container">
-            <b>Toggle Dark Mode</b>
-            <br />
-            <label class="toggle">
-                <input type="checkbox" id="darkModeToggle" />
-                <span class="slider"></span>
-            </label>
+        <div class="controls">
+            <div class="toggle-container">
+                <b id="darkModeText">Dark Mode</b> <br />
+                <label class="toggle">
+                    <input type="checkbox" id="darkModeToggle" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="language-select">
+                <b
+                    ><label for="language" id="selectLanguageText"
+                        >Language</label
+                    ></b
+                >
+                <br />
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="pl">Polish</option>
+                    <option value="es">Spanish</option>
+                </select>
+            </div>
         </div>
 
         <div id="container">
@@ -25,11 +41,9 @@
             <div id="quiz" style="display: none">
                 <div id="question"></div>
                 <div id="answers"></div>
-                <button onclick="nextQuestion()" style="display: none">
-                    Next
-                </button>
+                <button onclick="nextQuestion()">Next</button>
             </div>
         </div>
+        <script src="script.js"></script>
     </body>
-    <script src="script.js"></script>
 </html>

@@ -1,12 +1,85 @@
+// JavaScript (script.js)
 let words = [];
 let currentQuestion = 0;
+let currentLanguage = "en";
+
+const languageLabels = {
+    en: {
+        title: "Language Quiz",
+        placeholder: 'Paste word pairs here, one per line, separated by " - "',
+        startButton: "Start Quiz",
+        nextButton: "Next",
+        questionText: "What is the word for ",
+        darkModeText: "Dark Mode",
+        selectLanguageText: "Language",
+        alertMessage:
+            "Please enter at least two valid word pairs separated by ' - '. ",
+    },
+    pl: {
+        title: "Quiz Językowy",
+        placeholder: 'Wklej pary słów, po parze w linii, oddzielone " - "',
+        startButton: "Rozpocznij Quiz",
+        nextButton: "Następne",
+        questionText: "Jak jest słowo ",
+        darkModeText: "Tryb Ciemny",
+        selectLanguageText: "Język",
+        alertMessage:
+            "Proszę wprowadź co najmniej dwie pary słów oddzielone ' - '.",
+    },
+    es: {
+        title: "Cuestionario de Idiomas",
+        placeholder:
+            'Pega aquí los pares de palabras, uno por línea, separados por " - "',
+        startButton: "Iniciar cuestionario",
+        nextButton: "Siguiente",
+        questionText: "¿Cuál es la palabra para ",
+        darkModeText: "Modo Oscuro",
+        selectLanguageText: "Idioma",
+        alertMessage:
+            "Por favor, introduce al menos dos pares de palabras válidos separados por ' - '.",
+    },
+};
+
+function getTranslation(key) {
+    return languageLabels[currentLanguage][key];
+}
+
+function updateLanguage() {
+    document.title = getTranslation("title");
+    document.querySelector("h1").textContent = getTranslation("title");
+    document.getElementById("wordList").placeholder =
+        getTranslation("placeholder");
+    document.getElementById("start-button").textContent =
+        getTranslation("startButton");
+    document.querySelector('button[onclick="nextQuestion()"]').textContent =
+        getTranslation("nextButton");
+    document.getElementById("darkModeText").textContent =
+        getTranslation("darkModeText");
+    document.getElementById("selectLanguageText").textContent =
+        getTranslation("selectLanguageText");
+
+    if (document.getElementById("quiz").style.display === "block") {
+        document.getElementById("question").textContent = `${getTranslation(
+            "questionText"
+        )}"${words[currentQuestion].originalWord}"?`;
+    }
+}
+
+// Event listener for language selection
+document.getElementById("language").addEventListener("change", (event) => {
+    currentLanguage = event.target.value;
+    updateLanguage();
+});
 
 function startQuiz() {
     const wordList = document.getElementById("wordList").value;
-    words = wordList.split("\n").map((line) => {
-        const [translatedWord, originalWord] = line.split(" - ");
-        return { translatedWord, originalWord };
-    });
+    words = wordList
+        .split("\n")
+        .map((line) => {
+            const [translatedWord, originalWord] = line.split(" - ");
+            return { translatedWord, originalWord };
+        })
+        .filter((word) => word.originalWord && word.translatedWord);
 
     if (words.length > 1) {
         document.getElementById("quiz").style.display = "block";
@@ -15,25 +88,32 @@ function startQuiz() {
         const startButton = document.getElementById("start-button");
         startButton.style.display = "none";
     } else {
-        alert("Please enter at least two word pairs.");
+        alert(getTranslation("alertMessage"));
     }
 }
 
 function nextQuestion() {
-    currentQuestion = Math.floor(Math.random() * words.length);
-    const word = words[currentQuestion];
+    let word;
+    do {
+        currentQuestion = Math.floor(Math.random() * words.length);
+        word = words[currentQuestion];
+    } while (
+        !word.originalWord ||
+        !word.originalWord.trim() ||
+        !word.translatedWord ||
+        !word.translatedWord.trim()
+    );
 
-    document.getElementById(
-        "question"
-    ).textContent = `What is the word for "${word.originalWord}"?`;
+    document.getElementById("question").textContent = `${getTranslation(
+        "questionText"
+    )}"${word.originalWord}"?`;
 
-    // Improved answer generation
-    let answers = [...words]; // Copy all words
+    let answers = [...words];
     const correctIndex = answers.indexOf(word);
-    answers.splice(correctIndex, 1); // Remove the correct answer
-    answers = shuffle(answers).slice(0, 2); // Take 2 random incorrect answers
-    answers.push(word); // Add the correct answer back
-    answers = shuffle(answers); // Shuffle again to randomize position
+    answers.splice(correctIndex, 1);
+    answers = shuffle(answers).slice(0, 2);
+    answers.push(word);
+    answers = shuffle(answers);
 
     displayAnswers(answers);
 }
@@ -91,3 +171,5 @@ toggle.addEventListener("change", (event) => {
         body.classList.remove("dark-mode");
     }
 });
+
+updateLanguage();

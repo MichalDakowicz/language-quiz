@@ -2,7 +2,8 @@
 
 body {
     font-family: "Nunito Sans", sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth theme change */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 2rem;
 }
 
 /* Dark Mode Styles */
@@ -24,35 +25,44 @@ body.dark-mode .answer:hover {
 }
 body.dark-mode .slider {
     background-color: #666;
+    border-color: #666;
 }
 body.dark-mode .slider:before {
     background-color: #ccc;
 }
 body.dark-mode input:checked + .slider {
-    background-color: #2196f3;
+    background-color: #444;
 }
 body.dark-mode input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px #444;
 }
 body.dark-mode #wordList {
     background-color: #333;
     color: #eee;
     border-color: #666;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+body.dark-mode .language-select select {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+}
+
+h1 {
+    margin-block-start: 0;
 }
 
 #container {
-    width: 500px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 textarea {
-    width: calc(
-        100% - 22px
-    ); /* Adjust width to account for padding, border, and margin */
+    width: 100%;
     height: 150px;
     margin-bottom: 10px;
     padding: 10px;
@@ -61,6 +71,7 @@ textarea {
     resize: vertical;
     background-color: white;
     color: black;
+    box-sizing: border-box;
 }
 
 button {
@@ -70,7 +81,8 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
 button:hover {
@@ -82,18 +94,19 @@ button:hover {
 }
 
 #question {
-    font-size: 18px;
+    font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
 .answer {
     display: block;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 1rem;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
 .answer:hover {
@@ -113,14 +126,13 @@ button:hover {
 /* Toggle Button Styles */
 .toggle-container {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .toggle {
     position: relative;
     display: inline-block;
-    width: 60px;
     height: 34px;
+    width: 60px;
 }
 
 .toggle input {
@@ -139,7 +151,8 @@ button:hover {
     background-color: #ccc;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    border-radius: 34px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
 }
 
 .slider:before {
@@ -156,15 +169,63 @@ button:hover {
 }
 
 input:checked + .slider {
-    background-color: #2196f3;
+    background-color: #666;
+    border-color: #666;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px #666;
 }
 
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+/* Controls Styling */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.language-select {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.language-select label {
+    margin-right: 10px;
+}
+
+.language-select select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    height: 34px;
+}
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 600px) {
+    .controls {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .language-select {
+        margin-bottom: 10px;
+    }
+
+    #question {
+        font-size: 1rem;
+    }
+
+    .answer {
+        font-size: 0.9rem;
+    }
 }
