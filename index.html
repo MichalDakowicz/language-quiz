@@ -16,11 +16,11 @@
             </div>
 
             <div class="language-select">
-                <b
-                    ><label for="language" id="selectLanguageText"
+                <b>
+                    <label for="language" id="selectLanguageText"
                         >Language</label
-                    ></b
-                >
+                    >
+                </b>
                 <br />
                 <select id="language">
                     <option value="en">English</option>
@@ -32,16 +32,49 @@
 
         <div id="container">
             <h1>Language Quiz</h1>
+
+            <b id="select-mode-text">Select Mode:</b>
+            <select id="mode">
+                <option value="quiz" id="quizOption">Quiz</option>
+                <option value="learning-cards" id="learningCardsOption">
+                    Learning Cards
+                </option>
+            </select>
+
+            <br />
+
             <textarea
                 id="wordList"
                 placeholder="Paste word pairs here, one per line, separated by ' - '"
             ></textarea>
             <button onclick="startQuiz()" id="start-button">Start Quiz</button>
+            <button
+                onclick="startLearning()"
+                id="start-button-learn"
+                style="display: none"
+            >
+                Start Learning
+            </button>
 
             <div id="quiz" style="display: none">
                 <div id="question"></div>
                 <div id="answers"></div>
+                <div id="feedback"></div>
                 <button onclick="nextQuestion()">Next</button>
+            </div>
+
+            <div id="learning-cards" style="display: none">
+                <div class="card">
+                    <div class="card-front">
+                        <h2 id="cardFrontText">Front</h2>
+                        <p></p>
+                    </div>
+                    <div class="card-back" style="display: none">
+                        <h2 id="cardBackText">Back</h2>
+                        <p></p>
+                    </div>
+                    <button class="card-button">Flip</button>
+                </div>
             </div>
         </div>
         <script src="script.js"></script>
