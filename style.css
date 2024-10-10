@@ -62,6 +62,15 @@ body.dark-mode .card-button {
 body.dark-mode .card-button:hover {
     background-color: #444;
 }
+body.dark-mode input[type="checkbox"] {
+    accent-color: #444;
+    background-color: #333;
+}
+body.dark-mode #answer-typing {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+}
 
 h1 {
     margin-block-start: 0;
@@ -116,6 +125,23 @@ button:hover {
     background-color: #45a049;
 }
 
+input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #ccc;
+    margin-bottom: 10px;
+}
+
+#answer-typing {
+    margin-right: 10px;
+    height: 28px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 #quiz {
     margin-top: 20px;
 }
@@ -147,6 +173,13 @@ button:hover {
 .incorrect {
     background-color: #f44336 !important;
     color: white;
+}
+
+#feedback,
+#feedback-typing {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 /* Toggle Button Styles */

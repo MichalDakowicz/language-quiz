@@ -26,6 +26,8 @@
                     <option value="en">English</option>
                     <option value="pl">Polish</option>
                     <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
                 </select>
             </div>
         </div>
@@ -33,16 +35,25 @@
         <div id="container">
             <h1>Language Quiz</h1>
 
-            <b id="select-mode-text">Select Mode:</b>
-            <select id="mode">
-                <option value="quiz" id="quizOption">Quiz</option>
-                <option value="learning-cards" id="learningCardsOption">
-                    Learning Cards
-                </option>
-            </select>
+            <div id="quiz-options-box">
+                <b id="select-mode-text">Select Mode:</b>
+                <select id="mode">
+                    <option value="quiz" id="quizOption">Quiz</option>
+                    <option value="learning-cards" id="learningCardsOption">
+                        Learning Cards
+                    </option>
+                </select>
 
-            <br />
+                <br />
 
+                <div id="typing-mode-box">
+                    <input
+                        type="checkbox"
+                        name="typing-mode"
+                        id="typing-mode"
+                    /><span id="typing-mode-text">Typing Mode</span>
+                </div>
+            </div>
             <textarea
                 id="wordList"
                 placeholder="Paste word pairs here, one per line, separated by ' - '"
@@ -64,7 +75,7 @@
             </div>
 
             <div id="learning-cards" style="display: none">
-                <div class="card">
+                <div class="card" onclick="flipCard()">
                     <div class="card-front">
                         <h2 id="cardFrontText">Front</h2>
                         <p></p>
@@ -73,8 +84,29 @@
                         <h2 id="cardBackText">Back</h2>
                         <p></p>
                     </div>
-                    <button class="card-button">Flip</button>
                 </div>
+                <br />
+                <button onclick="nextCard()" id="next-card-button">
+                    Next Card
+                </button>
+            </div>
+
+            <div id="typing-quiz" style="display: none">
+                <div id="question-typing"></div>
+                <input
+                    type="text"
+                    id="answer-typing"
+                    autocomplete="off"
+                /><button
+                    onclick="checkAnswerTyping()"
+                    id="answer-typing-button"
+                >
+                    Check Answer
+                </button>
+                <div id="feedback-typing"></div>
+                <button onclick="nextQuestionTyping()" id="next-button-typing">
+                    Next
+                </button>
             </div>
         </div>
         <script src="script.js"></script>

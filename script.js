@@ -14,10 +14,18 @@ const languageLabels = {
         selectLanguageText: "Language",
         alertMessage:
             "Please enter at least two valid word pairs separated by ' - '. ",
+        selectModeText: "Select Mode",
         quizOption: "Quiz",
         learningCardsOption: "Learning Cards",
+        typingModeText: "Typing Mode",
+        answerTypingText: "Check Answer",
+        nextButtonText: "Next",
+        nextCardButton: "Next Card",
         cardFrontText: "Front",
         cardBackText: "Back",
+
+        correctAnswer: "Correct!",
+        incorrectAnswer: "Incorrect. The correct answer is ",
     },
     pl: {
         title: "Quiz Językowy",
@@ -30,10 +38,18 @@ const languageLabels = {
         selectLanguageText: "Język",
         alertMessage:
             "Proszę wprowadź co najmniej dwie pary słów oddzielone ' - '.",
+        selectModeText: "Wybierz Tryb",
         quizOption: "Quiz",
         learningCardsOption: "Fiszki",
+        typingModeText: "Tryb Pisania",
+        answerTypingText: "Sprawdź Odpowiedź",
+        nextButtonText: "Następne",
+        nextCardButton: "Następna Fiszka",
         cardFrontText: "Przód",
         cardBackText: "Tył",
+
+        correctAnswer: "Poprawnie!",
+        incorrectAnswer: "Niepoprawnie. Poprawna odpowiedź to ",
     },
     es: {
         title: "Cuestionario de Idiomas",
@@ -47,10 +63,68 @@ const languageLabels = {
         selectLanguageText: "Idioma",
         alertMessage:
             "Por favor, introduce al menos dos pares de palabras válidos separados por ' - '.",
+        selectModeText: "Seleccionar Modo",
         quizOption: "Cuestionario",
         learningCardsOption: "Tarjetas de Aprendizaje",
+        typingModeText: "Modo de Escritura",
+        answerTypingText: "Comprobar Respuesta",
+        nextButtonText: "Siguiente",
+        nextCardButton: "Siguiente Tarjeta",
         cardFrontText: "Frente",
         cardBackText: "Reverso",
+
+        correctAnswer: "¡Correcto!",
+        incorrectAnswer: "Incorrecto. La respuesta correcta es ",
+    },
+    fr: {
+        title: "Quiz de Langue",
+        placeholder:
+            'Collez ici les paires de mots, une par ligne, séparées par " - "',
+        startButton: "Démarrer le quiz",
+        startButtonLearn: "Commencer l'apprentissage",
+        nextButton: "Suivant",
+        questionText: "Quel est le mot pour ",
+        darkModeText: "Mode Sombre",
+        selectLanguageText: "Langue",
+        alertMessage:
+            "Veuillez entrer au moins deux paires de mots valides séparés par ' - '.",
+        selectModeText: "Sélectionner le Mode",
+        quizOption: "Quiz",
+        learningCardsOption: "Cartes d'Apprentissage",
+        typingModeText: "Mode d'Écriture",
+        answerTypingText: "Vérifier la Réponse",
+        nextButtonText: "Suivant",
+        nextCardButton: "Carte Suivante",
+        cardFrontText: "Face",
+        cardBackText: "Dos",
+
+        correctAnswer: "Correct !",
+        incorrectAnswer: "Incorrect. La réponse correcte est ",
+    },
+    de: {
+        title: "Sprachquiz",
+        placeholder:
+            'Füge hier Wortpaare ein, eins pro Zeile, getrennt durch " - "',
+        startButton: "Quiz starten",
+        startButtonLearn: "Lernen starten",
+        nextButton: "Nächste",
+        questionText: "Was ist das Wort für ",
+        darkModeText: "Dunkelmodus",
+        selectLanguageText: "Sprache",
+        alertMessage:
+            "Bitte gib mindestens zwei gültige Wortpaare ein, getrennt durch ' - '.",
+        selectModeText: "Modus auswählen",
+        quizOption: "Quiz",
+        learningCardsOption: "Lernkarten",
+        typingModeText: "Schreibmodus",
+        answerTypingText: "Antwort überprüfen",
+        nextButtonText: "Nächste",
+        nextCardButton: "Nächste Karte",
+        cardFrontText: "Vorderseite",
+        cardBackText: "Rückseite",
+
+        correctAnswer: "Richtig!",
+        incorrectAnswer: "Falsch. Die richtige Antwort ist ",
     },
 };
 
@@ -79,11 +153,21 @@ function updateLanguage() {
     document.getElementById("learningCardsOption").textContent = getTranslation(
         "learningCardsOption"
     );
+    document.getElementById("select-mode-text").textContent =
+        getTranslation("selectModeText");
+    document.getElementById("typing-mode-text").textContent =
+        getTranslation("typingModeText");
+    document.getElementById("next-button-typing").textContent =
+        getTranslation("nextButtonText");
+    document.getElementById("answer-typing-button").textContent =
+        getTranslation("answerTypingText");
 
     document.getElementById("cardFrontText").innerHTML =
         getTranslation("cardFrontText");
     document.getElementById("cardBackText").innerHTML =
         getTranslation("cardBackText");
+    document.getElementById("next-card-button").textContent =
+        getTranslation("nextCardButton");
 
     if (document.getElementById("quiz").style.display === "block") {
         document.getElementById("question").textContent = `${getTranslation(
@@ -105,14 +189,20 @@ document.getElementById("mode").addEventListener("change", (event) => {
         document.getElementById("learning-cards").style.display = "none";
         document.getElementById("start-button").style.display = "block";
         document.getElementById("start-button-learn").style.display = "none";
+        document.getElementById("typing-mode-box").style.display = "block";
     } else {
         document.getElementById("learning-cards").style.display = "none";
         document.getElementById("start-button-learn").style.display = "block";
         document.getElementById("start-button").style.display = "none";
+        document.getElementById("typing-mode-box").style.display = "none";
+        document.getElementById("typing-mode").checked = false;
     }
 });
 
 function startQuiz() {
+    document.getElementById("quiz-options-box").style.display = "none";
+
+    const checkTypingMode = document.getElementById("typing-mode").checked;
     const wordList = document.getElementById("wordList").value;
     words = wordList
         .split("\n")
@@ -123,17 +213,27 @@ function startQuiz() {
         .filter((word) => word.originalWord && word.translatedWord);
 
     if (words.length > 1) {
-        document.getElementById("quiz").style.display = "block";
-        document.getElementById("wordList").style.display = "none";
-        nextQuestion();
-        const startButton = document.getElementById("start-button");
-        startButton.style.display = "none";
+        if (!checkTypingMode) {
+            document.getElementById("quiz").style.display = "block";
+            document.getElementById("wordList").style.display = "none";
+            nextQuestion();
+            const startButton = document.getElementById("start-button");
+            startButton.style.display = "none";
+        } else {
+            document.getElementById("typing-quiz").style.display = "block";
+            document.getElementById("wordList").style.display = "none";
+            const startButton = document.getElementById("start-button");
+            startButton.style.display = "none";
+            nextQuestionTyping();
+        }
     } else {
         alert(getTranslation("alertMessage"));
     }
 }
 
 function startLearning() {
+    document.getElementById("quiz-options-box").style.display = "none";
+
     const wordList = document.getElementById("wordList").value;
     words = wordList
         .split("\n")
@@ -181,6 +281,50 @@ function nextQuestion() {
     displayAnswers(answers);
 }
 
+function nextQuestionTyping() {
+    document.getElementById("feedback-typing").textContent = "";
+    let word;
+    do {
+        currentQuestion = Math.floor(Math.random() * words.length);
+        word = words[currentQuestion];
+    } while (
+        !word.originalWord ||
+        !word.originalWord.trim() ||
+        !word.translatedWord ||
+        !word.translatedWord.trim()
+    );
+
+    document.getElementById("question-typing").textContent = `${getTranslation(
+        "questionText"
+    )}"${word.originalWord}"?`;
+
+    document.getElementById("answer-typing").value = "";
+    document.getElementById("answer-typing").focus();
+    document.getElementById("answer-typing").select();
+}
+
+function checkAnswerTyping() {
+    const answer = document.getElementById("answer-typing").value;
+    const correctAnswer = words[currentQuestion].translatedWord;
+
+    answer.trim();
+    answer.toLowerCase();
+
+    correctAnswer.trim();
+    correctAnswer.toLowerCase();
+
+    if (answer === correctAnswer) {
+        document.getElementById("feedback-typing").textContent =
+            getTranslation("correctAnswer");
+    } else {
+        document.getElementById(
+            "feedback-typing"
+        ).textContent = `${getTranslation(
+            "incorrectAnswer"
+        )}"${correctAnswer}".`;
+    }
+}
+
 function nextCard() {
     let word;
     do {
@@ -194,20 +338,24 @@ function nextCard() {
     );
 
     const card = document.querySelector(".card");
+    card.classList.remove("flipped"); // Ensure the card is unflipped
+    card.querySelector(".card-front").style.display = "block";
+    card.querySelector(".card-back").style.display = "none";
     card.querySelector(".card-front p").textContent = word.originalWord;
     card.querySelector(".card-back p").textContent = word.translatedWord;
+}
 
-    card.querySelector(".card-button").onclick = () => {
-        card.classList.toggle("flipped");
-        card.querySelector(".card-front").style.display =
-            card.querySelector(".card-front").style.display === "none"
-                ? "block"
-                : "none";
-        card.querySelector(".card-back").style.display =
-            card.querySelector(".card-back").style.display === "none"
-                ? "block"
-                : "none";
-    };
+function flipCard() {
+    const card = document.querySelector(".card");
+    card.classList.toggle("flipped");
+    card.querySelector(".card-front").style.display =
+        card.querySelector(".card-front").style.display === "none"
+            ? "block"
+            : "none";
+    card.querySelector(".card-back").style.display =
+        card.querySelector(".card-back").style.display === "none"
+            ? "block"
+            : "none";
 }
 
 function displayAnswers(answers) {
@@ -232,12 +380,13 @@ function checkAnswer(selectedAnswer, answerElement) {
 
     if (selectedAnswer === correctAnswer) {
         answerElement.classList.add("correct");
-        document.getElementById("feedback").textContent = "Correct!";
+        document.getElementById("feedback").textContent =
+            getTranslation("correctAnswer");
     } else {
         answerElement.classList.add("incorrect");
-        document.getElementById(
-            "feedback"
-        ).textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+        document.getElementById("feedback").textContent = `${getTranslation(
+            "incorrectAnswer"
+        )}"${correctAnswer}".`;
         document.querySelectorAll(".answer").forEach((el) => {
             if (el.textContent === correctAnswer) {
                 el.classList.add("correct");
@@ -265,6 +414,13 @@ toggle.addEventListener("change", (event) => {
         body.classList.add("dark-mode");
     } else {
         body.classList.remove("dark-mode");
+    }
+});
+
+document.getElementById("answer-typing").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        checkAnswerTyping();
     }
 });
 

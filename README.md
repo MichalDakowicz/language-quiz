@@ -25,10 +25,6 @@ This is a simple web application that allows users to test their vocabulary know
 
 No installation is required. Simply go to [Language Quiz](https://github.com/MichalDakowicz/language-quiz) website to access the app.
 
-## Future Enhancements
-
--   **Different Question Types:** Implement various question types, such as word input.
-
 ## Contributing
 
 Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
