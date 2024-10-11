@@ -6,8 +6,11 @@ This is a simple web application that allows users to test their vocabulary know
 
 -   **Customizable Word List:** Users can input their own list of words and their translations to create personalized quizzes.
 -   **Multiple Choice Quiz:** The app generates a multiple-choice quiz based on the provided word list.
+-   **Learning Cards:** Users can view the word list as learning cards to study the words and their translations.
+-   **Input Mode:** Users can switch to input mode to practice spelling the translations of the words.
 -   **Dark Mode:** Users can switch to a dark mode theme for a more comfortable viewing experience.
--   **Language Selection:** Users can select their target language for the quiz.
+-   **Language Selection:** Users can select their language for the website interface.
+-   **Loading and Saving Word Lists:** Users can save their word list to the browser's local storage and load it later.
 
 ## How it Works
 
