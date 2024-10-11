@@ -26,7 +26,7 @@ This is a simple web application that allows users to test their vocabulary know
 
 ## Installation
 
-No installation is required. Simply go to [Language Quiz](https://github.com/MichalDakowicz/language-quiz) website to access the app.
+No installation is required. Simply go to the [Language Quiz](https://michaldakowicz.github.io/language-quiz/) website to access the app.
 
 ## Contributing
 
