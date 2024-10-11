@@ -276,8 +276,16 @@ function updateLanguage() {
 // Event listener for language selection
 document.getElementById("language").addEventListener("change", (event) => {
     currentLanguage = event.target.value;
+    localStorage.setItem("language", currentLanguage);
     updateLanguage();
 });
+
+// Load language from local storage
+if (localStorage.getItem("language")) {
+    currentLanguage = localStorage.getItem("language");
+    document.getElementById("language").value = currentLanguage;
+    updateLanguage();
+}
 
 // Event listener for quiz type selection
 document.getElementById("mode").addEventListener("change", (event) => {
@@ -298,6 +306,7 @@ document.getElementById("mode").addEventListener("change", (event) => {
 
 function startQuiz() {
     document.getElementById("quiz-options-box").style.display = "none";
+    document.getElementById("container-save-load").style.display = "none";
 
     const checkTypingMode = document.getElementById("typing-mode").checked;
     const wordList = document.getElementById("wordList").value;
@@ -330,6 +339,7 @@ function startQuiz() {
 
 function startLearning() {
     document.getElementById("quiz-options-box").style.display = "none";
+    document.getElementById("container-save-load").style.display = "none";
 
     const wordList = document.getElementById("wordList").value;
     words = wordList
@@ -503,26 +513,6 @@ function shuffle(array) {
     return array;
 }
 
-const toggle = document.getElementById("darkModeToggle");
-const body = document.body;
-
-toggle.addEventListener("change", (event) => {
-    if (event.target.checked) {
-        body.classList.add("dark-mode");
-    } else {
-        body.classList.remove("dark-mode");
-    }
-});
-
-document.getElementById("answer-typing").addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        checkAnswerTyping();
-    }
-});
-
-updateLanguage();
-
 function saveWordList() {
     document.getElementById("save-WordList").style.display = "block";
     document.getElementById("load-WordList").style.display = "none";
@@ -556,17 +546,47 @@ function deleteFromLocalStorage() {
     const wordListName = document.getElementById("wordListSelect").value;
     localStorage.removeItem(wordListName);
     populateWordListSelect();
+    document.getElementById("container-save-load").style.display = "none";
 }
 
 function populateWordListSelect() {
     const wordListSelect = document.getElementById("wordListSelect");
     wordListSelect.innerHTML = "";
     for (let i = 0; i < localStorage.length; i++) {
-        const option = document.createElement("option");
-        option.value = localStorage.key(i);
-        option.textContent = localStorage.key(i);
-        wordListSelect.appendChild(option);
+        const key = localStorage.key(i);
+        if (key !== "darkMode" && key !== "language") {
+            const option = document.createElement("option");
+            option.value = key;
+            option.textContent = key;
+            wordListSelect.appendChild(option);
+        }
     }
 }
 
+const toggle = document.getElementById("darkModeToggle");
+const body = document.body;
+
+toggle.addEventListener("change", (event) => {
+    if (event.target.checked) {
+        body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "enabled");
+    } else {
+        body.classList.remove("dark-mode");
+        localStorage.removeItem("darkMode");
+    }
+});
+
+if (localStorage.getItem("darkMode") === "enabled") {
+    body.classList.add("dark-mode");
+    toggle.checked = true;
+}
+
+document.getElementById("answer-typing").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        checkAnswerTyping();
+    }
+});
+
+updateLanguage();
 populateWordListSelect();

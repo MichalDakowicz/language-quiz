@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 
+/* Base Styles */
 body {
     font-family: "Nunito Sans", sans-serif;
     padding: 2rem;
@@ -63,8 +64,8 @@ body.dark-mode .card-button:hover {
     background-color: #444;
 }
 body.dark-mode input[type="checkbox"] {
-    accent-color: #444;
-    background-color: #333;
+    accent-color: #444 !important;
+    border: 1px solid #666;
 }
 body.dark-mode #answer-typing {
     background-color: #444;
@@ -87,10 +88,12 @@ body.dark-mode #wordListSelect {
     border-color: #666;
 }
 
+/* Typography */
 h1 {
     margin-block-start: 0;
 }
 
+/* Form Elements */
 #mode {
     padding: 5px;
     border: 1px solid #ccc;
@@ -101,20 +104,10 @@ h1 {
     margin-bottom: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-#container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 textarea {
     width: 100%;
     height: 150px;
-    margin-bottom: 10px;
+    margin-bottom: 17px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -124,28 +117,13 @@ textarea {
     box-sizing: border-box;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
 input[type="checkbox"] {
-    margin-right: 10px;
     accent-color: #ccc;
-    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    margin: 0;
+    width: 19px;
+    height: 19px;
 }
-
 #answer-typing {
     margin-right: 10px;
     height: 28px;
@@ -157,15 +135,45 @@ input[type="checkbox"] {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1 rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+button:hover {
+    background-color: #45a049;
+}
+
+/* Layout Containers */
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 #quiz {
     margin-top: 20px;
 }
+#typing-mode-text {
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
 
+/* Quiz Styles */
 #question {
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
-
 .answer {
     display: block;
     padding: 1rem;
@@ -175,21 +183,17 @@ input[type="checkbox"] {
     border-radius: 4px;
     font-size: 1rem;
 }
-
 .answer:hover {
     background-color: #f1f1f1;
 }
-
 .correct {
     background-color: #4caf50 !important;
     color: white;
 }
-
 .incorrect {
     background-color: #f44336 !important;
     color: white;
 }
-
 #feedback,
 #feedback-typing {
     margin-top: 10px;
@@ -201,20 +205,17 @@ input[type="checkbox"] {
 .toggle-container {
     text-align: center;
 }
-
 .toggle {
     position: relative;
     display: inline-block;
     height: 34px;
     width: 60px;
 }
-
 .toggle input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 .slider {
     position: absolute;
     cursor: pointer;
@@ -228,7 +229,6 @@ input[type="checkbox"] {
     border-radius: 20px;
     border: 1px solid #ccc;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -241,23 +241,20 @@ input[type="checkbox"] {
     transition: 0.4s;
     border-radius: 50%;
 }
-
 input:checked + .slider {
     background-color: #666;
     border-color: #666;
 }
-
 input:focus + .slider {
     box-shadow: 0 0 1px #666;
 }
-
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
 
-/* Controls Styling */
+/* Control Panel Styles */
 .controls {
     display: flex;
     justify-content: space-around;
@@ -265,16 +262,13 @@ input:checked + .slider:before {
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
-
 .language-select {
     align-items: center;
     margin-bottom: 10px;
 }
-
 .language-select label {
     margin-right: 10px;
 }
-
 .language-select select {
     padding: 5px;
     border: 1px solid #ccc;
@@ -284,7 +278,7 @@ input:checked + .slider:before {
     height: 34px;
 }
 
-/* Learning Cards styling */
+/* Learning Cards Styles */
 .card {
     display: flex;
     flex-direction: column;
@@ -296,16 +290,13 @@ input:checked + .slider:before {
     background-color: white;
     color: black;
 }
-
 .card h2 {
     margin-block-start: 0;
     text-align: center;
 }
-
 .card p {
     font-size: 1.2rem;
 }
-
 .card-button {
     padding: 10px 20px;
     background-color: #4caf50;
@@ -316,31 +307,11 @@ input:checked + .slider:before {
     font-size: 1rem;
     margin-top: 10px;
 }
-
 .card-button:hover {
     background-color: #45a049;
 }
 
-/* Media Query for Smaller Screens */
-@media screen and (max-width: 600px) {
-    .controls {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .language-select {
-        margin-bottom: 10px;
-    }
-
-    #question {
-        font-size: 1rem;
-    }
-
-    .answer {
-        font-size: 0.9rem;
-    }
-}
-
+/* Save/Load Section */
 #container-save-load {
     display: flex;
     justify-content: center;
@@ -354,31 +325,31 @@ input:checked + .slider:before {
     margin: 0 auto;
     margin-top: 20px;
 }
-
 #save-WordList,
 #load-WordList {
     display: none;
-    margin-right: 20px;
 }
-
 #saveWordListText,
 #loadWordListText {
     display: block;
     margin-bottom: 10px;
 }
-
+#save-WordList button,
+#load-WordList button {
+    margin-top: 10px;
+}
 #saveWordListName {
     margin-right: 10px;
     height: 28px;
     padding: 5px;
-    width: 180px;
+    width: 100%;
+    max-width: 180px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
     color: black;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 #wordListSelect {
     padding: 5px;
     border: 1px solid #ccc;
@@ -386,6 +357,48 @@ input:checked + .slider:before {
     color: black;
     border-radius: 4px;
     height: 34px;
-    margin-bottom: 5px;
+    width: 100%;
+    max-width: 180px;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button Group Styles */
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+}
+#buttons button {
+    width: 30%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 600px) {
+    .controls {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .language-select {
+        margin-bottom: 10px;
+    }
+    #question {
+        font-size: 1rem;
+    }
+    .answer {
+        font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 454px) {
+    #buttons button {
+        padding-right: 0;
+        padding-left: 0;
+        width: 32.5% !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    #saveWordListName,
+    #wordListSelect {
+        width: 100%;
+        margin-right: 0;
+    }
 }
