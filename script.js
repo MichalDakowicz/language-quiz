@@ -26,6 +26,15 @@ const languageLabels = {
 
         correctAnswer: "Correct!",
         incorrectAnswer: "Incorrect. The correct answer is ",
+
+        saveButtonText: "Save",
+        loadButtonText: "Load",
+        saveWordListText: "Save Word List",
+        loadWordListText: "Load Word List",
+        saveWordListName: "Enter a name for the word list",
+        saveWordListButton: "Save Word List",
+        loadWordListButton: "Load Word List",
+        deleteButton: "Delete",
     },
     pl: {
         title: "Quiz Językowy",
@@ -50,6 +59,15 @@ const languageLabels = {
 
         correctAnswer: "Poprawnie!",
         incorrectAnswer: "Niepoprawnie. Poprawna odpowiedź to ",
+
+        saveButtonText: "Zapisz",
+        loadButtonText: "Wczytaj",
+        saveWordListText: "Zapisz Listę Słów",
+        loadWordListText: "Wczytaj Listę Słów",
+        saveWordListName: "Wprowadź nazwę listy słów",
+        saveWordListButton: "Zapisz Listę Słów",
+        loadWordListButton: "Wczytaj Listę Słów",
+        deleteButton: "Usuń",
     },
     es: {
         title: "Cuestionario de Idiomas",
@@ -75,6 +93,15 @@ const languageLabels = {
 
         correctAnswer: "¡Correcto!",
         incorrectAnswer: "Incorrecto. La respuesta correcta es ",
+
+        saveButtonText: "Guardar",
+        loadButtonText: "Cargar",
+        saveWordListText: "Guardar Lista de Palabras",
+        loadWordListText: "Cargar Lista de Palabras",
+        saveWordListName: "Introduce un nombre para la lista de palabras",
+        saveWordListButton: "Guardar Lista de Palabras",
+        loadWordListButton: "Cargar Lista de Palabras",
+        deleteButton: "Eliminar",
     },
     fr: {
         title: "Quiz de Langue",
@@ -100,6 +127,15 @@ const languageLabels = {
 
         correctAnswer: "Correct !",
         incorrectAnswer: "Incorrect. La réponse correcte est ",
+
+        saveButtonText: "Enregistrer",
+        loadButtonText: "Charger",
+        saveWordListText: "Enregistrer la Liste de Mots",
+        loadWordListText: "Charger la Liste de Mots",
+        saveWordListName: "Entrez un nom pour la liste de mots",
+        saveWordListButton: "Enregistrer la Liste de Mots",
+        loadWordListButton: "Charger la Liste de Mots",
+        deleteButton: "Supprimer",
     },
     de: {
         title: "Sprachquiz",
@@ -125,6 +161,49 @@ const languageLabels = {
 
         correctAnswer: "Richtig!",
         incorrectAnswer: "Falsch. Die richtige Antwort ist ",
+
+        saveButtonText: "Speichern",
+        loadButtonText: "Laden",
+        saveWordListText: "Wortliste speichern",
+        loadWordListText: "Wortliste laden",
+        saveWordListName: "Gib einen Namen für die Wortliste ein",
+        saveWordListButton: "Wortliste speichern",
+        loadWordListButton: "Wortliste laden",
+        deleteButton: "Löschen",
+    },
+    ru: {
+        title: "Языковой тест",
+        placeholder:
+            'Вставьте сюда пары слов, по одной на строку, разделенные " - "',
+        startButton: "Начать тест",
+        startButtonLearn: "Начать обучение",
+        nextButton: "Следующий",
+        questionText: "Какое слово для ",
+        darkModeText: "Темный режим",
+        selectLanguageText: "Язык",
+        alertMessage:
+            "Пожалуйста, введите как минимум две действительные пары слов, разделенные ' - '.",
+        selectModeText: "Выберите режим",
+        quizOption: "Тест",
+        learningCardsOption: "Учебные карточки",
+        typingModeText: "Режим печати",
+        answerTypingText: "Проверить ответ",
+        nextButtonText: "Следующий",
+        nextCardButton: "Следующая карточка",
+        cardFrontText: "Лицо",
+        cardBackText: "Обратная сторона",
+
+        correctAnswer: "Правильно!",
+        incorrectAnswer: "Неверно. Правильный ответ - ",
+
+        saveButtonText: "Сохранить",
+        loadButtonText: "Загрузить",
+        saveWordListText: "Сохранить список слов",
+        loadWordListText: "Загрузить список слов",
+        saveWordListName: "Введите имя для списка слов",
+        saveWordListButton: "Сохранить список слов",
+        loadWordListButton: "Загрузить список слов",
+        deleteButton: "Удалить",
     },
 };
 
@@ -168,6 +247,24 @@ function updateLanguage() {
         getTranslation("cardBackText");
     document.getElementById("next-card-button").textContent =
         getTranslation("nextCardButton");
+
+    document.getElementById("save-button").textContent =
+        getTranslation("saveButtonText");
+    document.getElementById("load-button").textContent =
+        getTranslation("loadButtonText");
+
+    document.getElementById("saveWordListText").textContent =
+        getTranslation("saveWordListText");
+    document.getElementById("loadWordListText").textContent =
+        getTranslation("loadWordListText");
+    document.getElementById("saveWordListName").placeholder =
+        getTranslation("saveWordListName");
+    document.getElementById("save-word-list-button").textContent =
+        getTranslation("saveWordListButton");
+    document.getElementById("load-word-list-button").textContent =
+        getTranslation("loadWordListButton");
+    document.getElementById("delete-button").textContent =
+        getTranslation("deleteButton");
 
     if (document.getElementById("quiz").style.display === "block") {
         document.getElementById("question").textContent = `${getTranslation(
@@ -425,3 +522,51 @@ document.getElementById("answer-typing").addEventListener("keyup", (event) => {
 });
 
 updateLanguage();
+
+function saveWordList() {
+    document.getElementById("save-WordList").style.display = "block";
+    document.getElementById("load-WordList").style.display = "none";
+    document.getElementById("container-save-load").style.display = "block";
+}
+
+function saveWordListToLocalStorage() {
+    const wordListName = document.getElementById("saveWordListName").value;
+    localStorage.setItem(
+        wordListName,
+        document.getElementById("wordList").value
+    );
+    populateWordListSelect();
+    document.getElementById("container-save-load").style.display = "none";
+}
+
+function loadWordList() {
+    document.getElementById("load-WordList").style.display = "block";
+    document.getElementById("save-WordList").style.display = "none";
+    document.getElementById("container-save-load").style.display = "block";
+}
+
+function loadWordListFromLocalStorage() {
+    const wordListName = document.getElementById("wordListSelect").value;
+    document.getElementById("wordList").value =
+        localStorage.getItem(wordListName);
+    document.getElementById("container-save-load").style.display = "none";
+}
+
+function deleteFromLocalStorage() {
+    const wordListName = document.getElementById("wordListSelect").value;
+    localStorage.removeItem(wordListName);
+    populateWordListSelect();
+}
+
+function populateWordListSelect() {
+    const wordListSelect = document.getElementById("wordListSelect");
+    wordListSelect.innerHTML = "";
+    for (let i = 0; i < localStorage.length; i++) {
+        const option = document.createElement("option");
+        option.value = localStorage.key(i);
+        option.textContent = localStorage.key(i);
+        wordListSelect.appendChild(option);
+    }
+}
+
+populateWordListSelect();

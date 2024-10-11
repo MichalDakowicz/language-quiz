@@ -28,6 +28,7 @@
                     <option value="es">Spanish</option>
                     <option value="fr">French</option>
                     <option value="de">German</option>
+                    <option value="ru">Russian</option>
                 </select>
             </div>
         </div>
@@ -58,6 +59,9 @@
                 id="wordList"
                 placeholder="Paste word pairs here, one per line, separated by ' - '"
             ></textarea>
+            <button onclick="saveWordList()" id="save-button">Save</button>
+            <button onclick="loadWordList()" id="load-button">Load</button>
+
             <button onclick="startQuiz()" id="start-button">Start Quiz</button>
             <button
                 onclick="startLearning()"
@@ -109,6 +113,39 @@
                 </button>
             </div>
         </div>
+
+        <div id="container-save-load" style="display: none">
+            <div id="save-WordList" style="display: none">
+                <b id="saveWordListText">Save Word List</b>
+                <br />
+                <input
+                    type="text"
+                    id="saveWordListName"
+                    placeholder="Enter a name for the word list"
+                />
+                <button
+                    onclick="saveWordListToLocalStorage()"
+                    id="save-word-list-button"
+                >
+                    Save Word List
+                </button>
+            </div>
+            <div id="load-WordList" style="display: none">
+                <b id="loadWordListText">Load Word List</b>
+                <br />
+                <select id="wordListSelect"></select>
+                <button
+                    onclick="loadWordListFromLocalStorage()"
+                    id="load-word-list-button"
+                >
+                    Load Word List
+                </button>
+                <button onclick="deleteFromLocalStorage()" id="delete-button">
+                    Delete
+                </button>
+            </div>
+        </div>
+
         <script src="script.js"></script>
     </body>
 </html>
