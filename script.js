@@ -305,9 +305,6 @@ document.getElementById("mode").addEventListener("change", (event) => {
 });
 
 function startQuiz() {
-    document.getElementById("quiz-options-box").style.display = "none";
-    document.getElementById("container-save-load").style.display = "none";
-
     const checkTypingMode = document.getElementById("typing-mode").checked;
     const wordList = document.getElementById("wordList").value;
     words = wordList
@@ -322,12 +319,22 @@ function startQuiz() {
         if (!checkTypingMode) {
             document.getElementById("quiz").style.display = "block";
             document.getElementById("wordList").style.display = "none";
+            document.getElementById("buttons").style.display = "none";
+            document.getElementById("quiz-options-box").style.display = "none";
+            document.getElementById("container-save-load").style.display =
+                "none";
+
             nextQuestion();
             const startButton = document.getElementById("start-button");
             startButton.style.display = "none";
         } else {
             document.getElementById("typing-quiz").style.display = "block";
             document.getElementById("wordList").style.display = "none";
+            document.getElementById("buttons").style.display = "none";
+            document.getElementById("quiz-options-box").style.display = "none";
+            document.getElementById("container-save-load").style.display =
+                "none";
+
             const startButton = document.getElementById("start-button");
             startButton.style.display = "none";
             nextQuestionTyping();
@@ -338,9 +345,6 @@ function startQuiz() {
 }
 
 function startLearning() {
-    document.getElementById("quiz-options-box").style.display = "none";
-    document.getElementById("container-save-load").style.display = "none";
-
     const wordList = document.getElementById("wordList").value;
     words = wordList
         .split("\n")
@@ -353,6 +357,10 @@ function startLearning() {
     if (words.length > 1) {
         document.getElementById("learning-cards").style.display = "block";
         document.getElementById("wordList").style.display = "none";
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("quiz-options-box").style.display = "none";
+        document.getElementById("container-save-load").style.display = "none";
+
         nextCard();
         const startButtonLearn = document.getElementById("start-button-learn");
         startButtonLearn.style.display = "none";
